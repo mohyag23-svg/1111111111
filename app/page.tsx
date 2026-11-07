@@ -6,7 +6,7 @@ import { products } from "@/data/products";
 import { Navbar } from "@/components/Navbar";
 import { ProductBottleScroll } from "@/components/ProductBottleScroll";
 import { BuyNowSection } from "@/components/BuyNowSection";
-import { ChevronLeft, ChevronRight, ArrowRight, Compass } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 // Individual narrative scrollytelling section matching reference architecture
 function NarrativeSection({
@@ -58,8 +58,6 @@ function NarrativeSection({
 export default function HomePage() {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
   const currentProduct = products[currentIndex];
-  const nextIndex = (currentIndex + 1) % products.length;
-  const nextProduct = products[nextIndex];
   const prevIndex = (currentIndex - 1 + products.length) % products.length;
   const prevProduct = products[prevIndex];
 
@@ -116,7 +114,7 @@ export default function HomePage() {
       {/* Fixed Right Chevron Button */}
       <button
         onClick={goToNext}
-        aria-label={`Next: ${nextProduct.name}`}
+        aria-label="Next fragrance"
         className="fixed right-4 sm:right-8 top-1/2 -translate-y-1/2 z-40 p-3 sm:p-4 rounded-full bg-black/40 hover:bg-black/80 backdrop-blur-xl border border-white/10 hover:border-white/30 text-white/70 hover:text-white transition-all duration-300 shadow-2xl hover:scale-110"
       >
         <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
@@ -211,40 +209,7 @@ export default function HomePage() {
             {/* Section 5: Luminous White Salon Showcase (slides smoothly up over the canvas!) */}
             <BuyNowSection product={currentProduct} />
 
-            {/* Section 6: Slanted Next Perfume Button */}
-            <section className="relative py-20 px-6 sm:px-10 max-w-6xl mx-auto z-20">
-              <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.8 }}
-              >
-                <button
-                  onClick={goToNext}
-                  className="w-full relative group overflow-hidden rounded-[2rem] p-10 sm:p-14 text-left border border-white/10 bg-neutral-950/80 backdrop-blur-2xl transition-all duration-500 hover:border-gold/50 shadow-2xl flex flex-col md:flex-row items-start md:items-center justify-between gap-6"
-                  style={{
-                    clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 20px), calc(100% - 20px) 100%, 0 100%)",
-                  }}
-                >
-                  <div className="space-y-3">
-                    <div className="flex items-center space-x-2 text-xs font-mono tracking-[0.3em] uppercase text-gold">
-                      <Compass className="w-3.5 h-3.5" />
-                      <span>Continue The Journey</span>
-                    </div>
-                    <div className="text-3xl sm:text-5xl font-black italic uppercase text-white tracking-tight">
-                      Next: {nextProduct.name}
-                    </div>
-                    <p className="text-premium/60 text-sm sm:text-base font-light">
-                      {nextProduct.subName} — {nextProduct.price}
-                    </p>
-                  </div>
 
-                  <div className="p-5 rounded-full bg-gold text-black group-hover:scale-110 transition-transform duration-300">
-                    <ArrowRight className="w-6 h-6" />
-                  </div>
-                </button>
-              </motion.div>
-            </section>
           </div>
         </motion.div>
       </AnimatePresence>
